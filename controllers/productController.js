@@ -74,9 +74,9 @@ const getOneProduct = async (req, res) => {
 
 const addProduct = async (req, res) => {
     console.log(req.files.image.path);
-    const imgPath = req.files.image.path.split("\\")
+    /*const imgPath = req.files.image.path.split("\\")*/
     // DEPLOY PATH //
-    /*const imgPath = req.files.image.path.split("/")*/
+    const imgPath = req.files.image.path.split("/")
     const imgString = imgPath[2]
 
     const product = new Product(req.body)
@@ -193,9 +193,9 @@ const deleteVariantByStock = async (req, res) => {
 
 const addImageInGallery = async (req, res) => {
     console.log(req.files.image.path);
-    const imgPath = req.files.image.path.split("\\")
+    /*const imgPath = req.files.image.path.split("\\")*/
     // DEPLOY PATH //
-    /*const imgPath = req.files.image.path.split("/")*/
+    const imgPath = req.files.image.path.split("/")
     const imgString = imgPath[2]
     
     const image = new ProductGallery(req.body)
