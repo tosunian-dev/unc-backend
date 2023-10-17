@@ -159,7 +159,8 @@ const getOrderData = async (req, res) => {
 const getOrders = async (req, res) => {
     const {id} = req.params
     if (id.match(/^[0-9a-fA-F]{24}$/)){
-        const sales = await Sale.find({client:id}).sort({createdAt: -1}).populate('address')
+        // AGREGAR CONDICION STATUS === APPROVED //
+        const sales = await Sale.find({client:id, status: 'approved'}).sort({createdAt: -1}).populate('address')
         /* const saleDetails = await SaleDetail.find({sale:id}).populate('product').populate('variant')*/
         return res.status(200).json(sales)
     }
