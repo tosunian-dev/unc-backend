@@ -11,7 +11,8 @@ const getOrders = async (req, res) => {
         createdAt:{
             $gte: new Date(inicio+'T00:00:00'),
             $lt: new Date(hasta+'T00:00:00')
-        }
+        },
+        status: 'approved'
     }).populate('client').populate('address')
     res.json(orders)
 }
