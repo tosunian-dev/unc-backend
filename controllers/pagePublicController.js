@@ -31,7 +31,7 @@ const getLatestProducts = async (req, res) => {
 }
 
 const getMostWantedProducts = async (req, res) => {
-    const latestProducts = await Product.find({discount: true}).limit(8)
+    const latestProducts = await Product.aggregate([{$sample: {size: 4}}])
     res.status(200).json(latestProducts)
 }
 
