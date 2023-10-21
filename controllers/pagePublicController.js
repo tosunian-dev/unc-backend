@@ -7,10 +7,25 @@ import Subcategory from "../models/Subcategory.js";
 import USDSettings from "../models/USDSettings.js"
 import USDLogs from "../models/USDLogs.js"
 import axios from 'axios'
+import Gallery from "../models/ProductGallery.js";
 
 const getLatestProducts = async (req, res) => {
     const latestProducts = await Product.find().sort({createdAt: -1}).limit(4)
-    res.status(200).json(latestProducts)
+    const latestProductsImages = []
+
+    for(const product of latestProducts){
+        const images = await Gallery.find({product: product._id})
+        console.log(images);
+        if(images.length > 0){
+            latestProductsImages.push({
+                productId: product._id,
+                image: images[0].image
+            })
+        }
+
+    }
+
+    res.status(200).json(latestProductsImages)
 }
 
 const getMostWantedProducts = async (req, res) => {
