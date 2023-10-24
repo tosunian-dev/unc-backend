@@ -17,12 +17,14 @@ const getLatestProducts = async (req, res) => {
         const images = await Gallery.find({product: product._id})
         console.log(images);
         if(images.length > 0 && product.subcategory === 'CAPSULAS' || 'Capsulas'){
-            latestProductsImages.push({
-                productId: product._id,
-                name: product.name,
-                image: images[0].image,
-                slug: product.slug
-            })
+            if(images[1]){
+                latestProductsImages.push({
+                    productId: product._id,
+                    name: product.name,
+                    image: images[1].image,
+                    slug: product.slug
+                })
+            }
         }
 
     }
