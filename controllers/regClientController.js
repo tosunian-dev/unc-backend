@@ -77,8 +77,6 @@ const getSaleAfterPayment = async (req, res) => {
 
 const createSale = async (req, res) => {
     const sale = new Sale(req.body)
-    console.log(req.body);
-    console.log(req.body.saleDetail);
     sale.year = new Date().getFullYear()
     sale.month = new Date().getMonth()+1
     sale.day = new Date().getDate()
@@ -133,7 +131,7 @@ const saleVerification = async (req, res) => {
             console.log(saleDetails);
             for(const item of saleDetails){
                 try {
-                    const product = await Product.findById(item.variant)
+                    const product = await Product.findById(item.product)
                     const newStock = product.stock - item.items
                     await Product.findByIdAndUpdate(item.product, {stock: newStock})
                     console.log('stock updated')
