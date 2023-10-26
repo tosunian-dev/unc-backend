@@ -11,8 +11,10 @@ import axios from 'axios'
 
 const createCart = async (req, res) => {
     const cart = new Cart(req.body)
-    const variant = await Variant.findById({_id: cart.variant})
-    if(req.body.amountOfProducts <= variant.stock){
+    console.log(cart);
+    const product = await Product.findById({_id: cart.product})
+    console.log(product);
+    if(req.body.amountOfProducts <= product.stock){
         const savedCart = await cart.save()
         return res.status(200).json(savedCart)
     } else{
@@ -22,7 +24,7 @@ const createCart = async (req, res) => {
 
 const getCart = async (req, res) => {
     const {user} = req.params
-    const cart = await Cart.find({client: user}).populate('product').populate('variant').sort({createdAt: -1})
+    const cart = await Cart.find({client: user}).populate('product').sort({createdAt: -1})
     return res.status(200).json(cart)
 }
 
@@ -75,6 +77,7 @@ const getSaleAfterPayment = async (req, res) => {
 
 const createSale = async (req, res) => {
     const sale = new Sale(req.body)
+    console.log(req.body);
     console.log(req.body.saleDetail);
     sale.year = new Date().getFullYear()
     sale.month = new Date().getMonth()+1
@@ -130,9 +133,9 @@ const saleVerification = async (req, res) => {
             console.log(saleDetails);
             for(const item of saleDetails){
                 try {
-                    const variant = await Variant.findById(item.variant)
-                    const newStock = variant.stock - item.items
-                    await Variant.findByIdAndUpdate(item.variant, {stock: newStock})
+                    const product = await Product.findById(item.variant)
+                    const newStock = product.stock - item.items
+                    await Product.findByIdAndUpdate(item.product, {stock: newStock})
                     console.log('stock updated')
                 } catch (error) {
                     console.log('stock cannot be updated');

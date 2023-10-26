@@ -24,7 +24,8 @@ const productSchema = mongoose.Schema({
     },
     stock: {
         type: Number,
-        default: 0
+        default: 0,
+        required: true
     },
     discount: {
         type: Boolean,

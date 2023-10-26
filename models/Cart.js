@@ -13,10 +13,6 @@ const cartSchema = mongoose.Schema({
         type: Schema.ObjectId, ref: 'Product',
         required: true,
     },
-    variant: {
-        type: Schema.ObjectId, ref: 'Variant',
-        required: true,
-    },
     createdAt: {
         type: Date,
         default: Date.now()
