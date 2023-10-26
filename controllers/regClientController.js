@@ -151,7 +151,7 @@ const getOrderData = async (req, res) => {
     const {id} = req.params
     if (id.match(/^[0-9a-fA-F]{24}$/)){
         const sale = await Sale.find({_id:id}).populate('address')
-        const saleDetails = await SaleDetail.find({sale:id}).populate('product').populate('variant')
+        const saleDetails = await SaleDetail.find({sale:id}).populate('product')
         return res.status(200).json({sale, saleDetails})
     }
     
