@@ -33,7 +33,7 @@ const saleSchema = mongoose.Schema({
     },
     address: {
         type: Schema.ObjectId, ref: 'Address',
-        required: true
+        required: false
     },
     transaction: {
         type: String,

@@ -11,9 +11,7 @@ import axios from 'axios'
 
 const createCart = async (req, res) => {
     const cart = new Cart(req.body)
-    console.log(cart);
     const product = await Product.findById({_id: cart.product})
-    console.log(product);
     if(req.body.amountOfProducts <= product.stock){
         const savedCart = await cart.save()
         return res.status(200).json(savedCart)

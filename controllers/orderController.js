@@ -29,7 +29,7 @@ const getOrder = async (req, res) => {
 
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
         const order = await Sale.find({_id: id}).populate('client').populate('address')
-        const details = await SaleDetail.find({sale: id}).populate('variant').populate('product')
+        const details = await SaleDetail.find({sale: id}).populate('product')
         return res.status(200).json({order, details})
     } else {
         return res.status(200).json({msg:'El ID del pedido es incorrecto.'})
