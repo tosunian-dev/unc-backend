@@ -111,22 +111,18 @@ const saleVerification = async (req, res) => {
         if(data.status == 'pending' || data.status == 'in_process'){
             saleToUpdate.status = 'pending'
             await saleToUpdate.save()
-            console.log('status updated to pending')
         }
         // PAYMENT DENIED //
         if(data.status == 'rejected' || data.status == 'cancelled'){
             saleToUpdate.status = 'rejected'
             await saleToUpdate.save()
-            console.log('status updated to rejected')
         }
         // PAYMENT APPROVED //
         if(data.status == 'approved'){
             saleToUpdate.status = 'approved'
             await saleToUpdate.save()
-            console.log('status updated to approved')
             // UPDATE STOCK //
             const saleDetails = await SaleDetail.find({sale:data.metadata.sale_id})
-            console.log(saleDetails);
             for(const item of saleDetails){
                 try {
                     const product = await Product.findById(item.product)

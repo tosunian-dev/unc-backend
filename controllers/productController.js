@@ -73,7 +73,6 @@ const getOneProduct = async (req, res) => {
 }
 
 const addProduct = async (req, res) => {
-    console.log(req.files.image.path);
     /*const imgPath = req.files.image.path.split("\\")*/
     // DEPLOY PATH //
     const imgPath = req.files.image.path.split("/")
@@ -151,7 +150,6 @@ const editProduct = async (req, res) => {
         const editedProduct = await product.save()
         return res.status(200).json(editedProduct)
     } catch (error) {
-        console.log(req.files.image)
         return res.status(200).json(req.files.image)
     }
 }
@@ -192,18 +190,13 @@ const deleteVariantByStock = async (req, res) => {
 }
 
 const addImageInGallery = async (req, res) => {
-    console.log(req.files.image.path);
     /*const imgPath = req.files.image.path.split("\\")*/
     // DEPLOY PATH //
     const imgPath = req.files.image.path.split("/")
     const imgString = imgPath[2]
     
     const image = new ProductGallery(req.body)
-
     image.image = imgString
-    console.log(imgPath);
-    console.log(imgString);
-    console.log(image);
 
     try {
         const imageSaved = await image.save()

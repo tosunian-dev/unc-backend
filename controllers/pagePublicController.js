@@ -15,7 +15,6 @@ const getLatestProducts = async (req, res) => {
 
     for(const product of latestProducts){
         const images = await Gallery.find({product: product._id})
-        console.log(images);
         if(images.length > 0 && product.subcategory === 'CAPSULAS' || 'Capsulas'){
             if(images[1]){
                 latestProductsImages.push({
