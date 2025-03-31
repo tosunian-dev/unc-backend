@@ -46,13 +46,12 @@ connectDB()
   res.header('Allow','GET, PUT, POST, DELETE, OPTIONS');
   next();
 });*/
+
 // Habilitar CORS 
 const dominiosPermitidos = [process.env.FRONTEND_URL, process.env.FRONTEND_URL_DEV, process.env.FRONTEND_PAGE_URL, process.env.FRONTEND_URL_DEV_2]
 
 app.use(cors({origin: dominiosPermitidos, credentials: true}))
-
-
-
+//
 const PORT = process.env.PORT || 4000
 
 httpServer.listen(PORT, () => {
